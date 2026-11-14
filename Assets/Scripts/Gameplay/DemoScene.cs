@@ -8,7 +8,7 @@ public class DemoScene : SceneController
 
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.SwapMap(ActionMap.Gameplay);
+            GameManager.Instance.SwapMap(ActionMap.D3Gameplay);
         }
     }
 

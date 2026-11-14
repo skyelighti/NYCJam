@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public InputSystem_Actions inputActions;
     public event Action<ActionMap> ActionMapChanged;
+    public ActionMap currentActionMap = ActionMap.D1Gameplay;
     private void Awake()
     {
         if (Instance != null)
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
             m.Disable();
         }
         inputActions.asset.FindActionMap(map.ToString()).Enable();
+        currentActionMap = map;
         ActionMapChanged?.Invoke(map);
     }
 
@@ -58,4 +60,4 @@ public class GameManager : MonoBehaviour
     }
     
 }
-public enum ActionMap { Gameplay, UI, Dialouge, CustomUI }
+public enum ActionMap { D1Gameplay, D2Gameplay, D3Gameplay, UI, Dialouge, CustomUI }
