@@ -11,8 +11,13 @@ public class Movement : MonoBehaviour, IMoveable
     private Rigidbody rb;
     public float speed;
     private Animator animator;
+    Vector3 basePos;
 
     private bool hasMovedThisPress = false;
+    [SerializeField] float dodgeRange = 3f;
+    [SerializeField] float dodgeSpeed = 2f;
+    [SerializeField] float returnSpeed = 3f;
+    Vector2 offset;
 
     public Vector2 input { get ; set ; }
 
@@ -21,6 +26,7 @@ public class Movement : MonoBehaviour, IMoveable
     {
         animator = gameObject.GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        basePos = transform.localPosition;
     }
 
     // Update is called once per frame
@@ -31,10 +37,18 @@ public class Movement : MonoBehaviour, IMoveable
     }
     public void Move()
     {
-            animator.SetFloat("X", input.x);
-            animator.SetFloat("Y", input.y);
+        if (input != Vector2.zero)
+        {
+            offset += input * dodgeSpeed * Time.deltaTime;
+            offset = Vector2.ClampMagnitude(offset, dodgeRange);
 
-            //rb.MovePosition(rb.position + input.normalized * Time.fixedDeltaTime * speed);
+        }
+        else {
+            offset = Vector2.MoveTowards(offset, Vector2.zero, returnSpeed * Time.deltaTime);
+            
+        }
+        transform.localPosition = basePos + new Vector3(offset.x, offset.y, 0);
+
     }
 
 }

@@ -6,9 +6,9 @@ using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 
 public enum SceneNames { 
 
-    StartScene,
+    //StartScene,
     Gameplay,
-    EndScene
+    //EndScene
 }
 public class SceneManager : MonoBehaviour
 {
@@ -90,7 +90,10 @@ public class SceneManager : MonoBehaviour
 
     void EnterCurrentScene()
     {
+        currentScene = FindFirstObjectByType<SceneController>();
+        if (currentScene == null) { Debug.LogError("No SceneController"); return; }
         currentScene.EnterState();
+
     }
 
     void OnDestroy()
