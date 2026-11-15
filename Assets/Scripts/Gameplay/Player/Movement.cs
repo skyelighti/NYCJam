@@ -28,6 +28,7 @@ public class Movement : MonoBehaviour, IMoveable
     public event Action<string> playerCollided;
     public event Action<string> playerCollisionFin;
     public event Action<Vector2> dodge;
+    public event Action<Vector2> dodgeEnd;
 
     StateMachine movementSM = new();
     enum KnockbackPhase { None, Shove, Recover }
@@ -54,21 +55,24 @@ public class Movement : MonoBehaviour, IMoveable
         Move();
 
     }
-    Vector2 oldinput;
+    Vector2 lastDir;
     public void Move()
     {
+        Vector2 dir = GetDirection(input);
+        if (dir != lastDir)
+        {
+            if (lastDir != Vector2.zero)
+            { dodgeEnd?.Invoke(lastDir); }
+            if (dir != Vector2.zero)
+            {
+                dodge?.Invoke(dir);
+            }
+            lastDir = dir;
+        }
         if (input != Vector2.zero)
         {
             offset += input * dodgeSpeed * Time.deltaTime;
             offset = Vector2.ClampMagnitude(offset, dodgeRange);
-            if (input.x > 0 && oldinput != input)
-            {
-                dodge?.Invoke(Vector2.right);
-
-            }
-            else if (input.x < 0 & oldinput != input) {
-                dodge?.Invoke(Vector2.left);
-            }
             
         }
         else {
@@ -76,7 +80,6 @@ public class Movement : MonoBehaviour, IMoveable
             
         }
         transform.localPosition = new Vector3(basePos.x, basePos.y, Zoffset) + new Vector3(offset.x, offset.y, 0);
-        oldinput = input;
 
     }
 
@@ -86,6 +89,28 @@ public class Movement : MonoBehaviour, IMoveable
         movementSM.SetState((int)KnockbackPhase.Shove);
     }
 
+    Vector2 GetDirection(Vector2 input) {
+        if (input == Vector2.zero) { return Vector2.zero; }
+        if (Math.Abs(input.x) > Math.Abs(input.y))
+        {
+            if (input.x > 0)
+            {
+                return Vector2.right;
+            }
+            else
+            {
+                return Vector2.left;
+            }
+        }
+        else {
+            if (input.y > 0)
+            {
+                return Vector2.up;
+            }
+            else { return Vector2.down; }
+        }
+    
+    }
 
 
     void EnterDefault() { }

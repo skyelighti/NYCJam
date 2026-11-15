@@ -10,14 +10,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] string moveName = "P1Move";
     InputAction moveAction;
     public Movement move;
-
+    MaterialPropertyBlock mpb;
     Animator animator;
 
     Rigidbody rb;
     bool inCollisionRecovery = false;
 
     [SerializeField] float knockbackDist = 3;
-    [SerializeField] bool spriteFacesRight;
+
     SpriteRenderer sprite;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -31,8 +31,10 @@ public class PlayerController : MonoBehaviour
         UpdateActionMap();
         animator = GetComponentInChildren<Animator>();
         move.dodge += OnDodge;
+        move.dodgeEnd += OnDodgeEnd;
         rb = GetComponent<Rigidbody>();
         sprite = GetComponentInChildren<SpriteRenderer>();
+        mpb = new MaterialPropertyBlock();
     }
     public void OnDestroy()
     {
@@ -51,22 +53,27 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    Coroutine unflipRoutine; 
+
     void OnDodge(Vector2 dir)
     {
-        if (animator == null || animator.GetCurrentAnimatorStateInfo(0).IsName("Dodge")) { return; }
-
-        bool needFlip = (dir.x > 0) != spriteFacesRight;
-        StartCoroutine(PlayDodge(needFlip));
+        if (animator == null) return;
+        if (unflipRoutine != null) { StopCoroutine(unflipRoutine); unflipRoutine = null; }
+        SetFlip(dir.x > 0);
+        animator.SetBool("Dodge", true);
     }
 
-    IEnumerator PlayDodge(bool flip)
+    void OnDodgeEnd(Vector2 dir)
     {
-        sprite.flipX = flip;
-        animator.SetTrigger("Dodge");
-        yield return null;
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Dodge") && !animator.IsInTransition(0));
-        yield return new WaitUntil(() => !animator.GetCurrentAnimatorStateInfo(0).IsName("Dodge"));
-        sprite.flipX = false;
+        if (animator == null) return;
+        animator.SetBool("Dodge", false);
+        if (unflipRoutine != null) StopCoroutine(unflipRoutine);
+        unflipRoutine = StartCoroutine(UnflipWhenDone());
+    }
+    IEnumerator UnflipWhenDone()
+    {
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Walking"));
+        SetFlip(false);
     }
 
     void OnMove(InputAction.CallbackContext value)
@@ -100,6 +107,13 @@ public class PlayerController : MonoBehaviour
             move.Knockback(knockbackDist);
             print("collision occured");
         }
+    }
+
+    void SetFlip(bool flip)
+    {
+        sprite.GetPropertyBlock(mpb);
+        mpb.SetFloat("_Flip", flip ? -1f : 1f);
+        sprite.SetPropertyBlock(mpb);
     }
 
 }
