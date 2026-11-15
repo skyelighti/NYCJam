@@ -19,7 +19,7 @@ public class SplineMovement : MonoBehaviour
     bool player1Col = false;
     bool player2Col = false;
     [SerializeField] Movement player2;
-    Dictionary<ActionMap, float> playerSpace = new() { { ActionMap.D1Gameplay, 1.5f }, {ActionMap.D2Gameplay, 3f }, { ActionMap.D3Gameplay, 5f} };
+    Dictionary<ActionMap, float> playerSpace = new() { { ActionMap.D1Gameplay, 5f}, {ActionMap.D2Gameplay, 3f }, { ActionMap.D3Gameplay, 1.6f} };
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

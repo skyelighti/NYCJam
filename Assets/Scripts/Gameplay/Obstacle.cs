@@ -19,6 +19,7 @@ public class Obstacle : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player")) {
             //destroy/hide the gameobject. this would be a lot easier with object pooling
+            DayManager.Instance.UpdateTimeCount(50);
             Destroy(gameObject);
         }
     }
