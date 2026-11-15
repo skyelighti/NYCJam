@@ -182,7 +182,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""363f473a-0df1-4d70-8d0c-9194ef8b8a17"",
-                    ""path"": ""<Keyboard>/h"",
+                    ""path"": ""<Keyboard>/j"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",

@@ -35,9 +35,13 @@ public class SplineMovement : MonoBehaviour
             player2.playerCollisionFin += OnPlayerCollisionFin;
         }
         GameManager.Instance.ActionMapChanged += OnActionMapChanged;
+        Events.increaseSpeed += OnIncreaseSpeed;
     }
 
-    public void UpdateSpeed(int newSpeed) {
+    public void OnIncreaseSpeed(float amount) {
+        UpdateSpeed(speed + amount);
+    }
+    public void UpdateSpeed(float newSpeed) {
         initSpeed = newSpeed;
         if (speed != 0) {
             speed = newSpeed;
