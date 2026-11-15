@@ -1,11 +1,14 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    
     private InputSystem_Actions inputActions;
     [SerializeField] string moveName = "P1Move";
     InputAction moveAction;
@@ -20,9 +23,17 @@ public class PlayerController : MonoBehaviour
 
     SpriteRenderer sprite;
 
+    StateMachine playerSM;
+    [SerializeField] RuntimeAnimatorController normal;
+    [SerializeField] RuntimeAnimatorController banged;
+    [SerializeField] RuntimeAnimatorController hurt;
+    [SerializeField] RuntimeAnimatorController cooked;
+    int hitAmount = 0;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
         GameManager.Instance.ActionMapChanged += OnActionMapChanged;
         this.inputActions = GameManager.Instance.inputActions;
         move = GetComponent<Movement>();
@@ -105,8 +116,10 @@ public class PlayerController : MonoBehaviour
         {
             //trigger a collision. tells the spline movement to stop, and wait until this player catches up to the original position
             move.Knockback(knockbackDist);
+            hitAmount++;
             print("collision occured");
         }
+
     }
 
     void SetFlip(bool flip)
@@ -116,4 +129,10 @@ public class PlayerController : MonoBehaviour
         sprite.SetPropertyBlock(mpb);
     }
 
+}
+public enum PlayerState { 
+    Default, 
+    SlightlyH,
+    Hurt,
+    Banged
 }
