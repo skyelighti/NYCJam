@@ -1,3 +1,4 @@
+using Boxophobic.Utility;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,16 +24,24 @@ public class PlayerController : MonoBehaviour
 
     SpriteRenderer sprite;
 
-    StateMachine playerSM;
+    StateMachine playerSM = new();
     [SerializeField] RuntimeAnimatorController normal;
-    [SerializeField] RuntimeAnimatorController banged;
+    [SerializeField] RuntimeAnimatorController slightlyH;
     [SerializeField] RuntimeAnimatorController hurt;
     [SerializeField] RuntimeAnimatorController cooked;
+
+    [SerializeField] int s1, s2, s3 = 5;
     int hitAmount = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        playerSM.SetNumOfStates(4);
+        playerSM.SetStateFunctions((int)PlayerState.Default, EnterDefault, BadAtCode, BadAtCode);
+        playerSM.SetStateFunctions((int)PlayerState.SlightlyH, EnterSlightlyH, BadAtCode, BadAtCode);
+        playerSM.SetStateFunctions((int)PlayerState.Hurt, EnterHurt, BadAtCode, BadAtCode);
+        playerSM.SetStateFunctions((int)PlayerState.Banged, EnterBanged, BadAtCode, BadAtCode);
+        playerSM.SetState((int)PlayerState.Default);
 
         GameManager.Instance.ActionMapChanged += OnActionMapChanged;
         this.inputActions = GameManager.Instance.inputActions;
@@ -52,6 +61,30 @@ public class PlayerController : MonoBehaviour
         if (inputActions != null) {
             moveAction.performed -= OnMove;
             moveAction.canceled -= OnMove;
+        }
+    }
+    void BadAtCode() { }
+    void EnterDefault() {
+        
+        ChangeAnimator(normal);
+    }
+
+    void EnterSlightlyH() {
+        ChangeAnimator(slightlyH);
+    }
+
+    void EnterHurt() {
+        ChangeAnimator(hurt);
+    }
+    void EnterBanged() {
+        ChangeAnimator(cooked);
+    }
+
+    void ChangeAnimator(RuntimeAnimatorController controller) {
+        if (animator.runtimeAnimatorController == controller) { return; }
+        if (animator != null && controller != null)
+        {
+            animator.runtimeAnimatorController = controller;
         }
     }
     public void UpdateActionMap()
@@ -106,7 +139,9 @@ public class PlayerController : MonoBehaviour
     }
     // Update is called once per frame
     void Update()
-    { }
+    {
+        playerSM.UpdateState();
+    }
         
 
 
@@ -117,9 +152,28 @@ public class PlayerController : MonoBehaviour
             //trigger a collision. tells the spline movement to stop, and wait until this player catches up to the original position
             move.Knockback(knockbackDist);
             hitAmount++;
-            print("collision occured");
+            CheckHitCount();
         }
 
+    }
+
+    void CheckHitCount() {
+        PlayerState s = PlayerState.Default; 
+        if (hitAmount >= s3)
+        {
+            s = PlayerState.Banged;
+        }
+        else if (hitAmount >= s2)
+        {
+            s = PlayerState.Hurt;
+        }
+        else if (hitAmount >= s1) {
+            s = PlayerState.SlightlyH;
+        }
+        if ((PlayerState)playerSM.CurrentState != s) {
+            playerSM.SetState((int)s);
+        }
+        
     }
 
     void SetFlip(bool flip)
