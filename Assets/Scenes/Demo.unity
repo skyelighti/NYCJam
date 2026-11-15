@@ -455,6 +455,13 @@ MonoBehaviour:
   moveName: P1Move
   move: {fileID: 164387679}
   knockbackDist: 3
+  normal: {fileID: 9100000, guid: e2993a6c0b141f540be59900bc8dc6a6, type: 2}
+  slightlyH: {fileID: 22100000, guid: 3b77a3a94924f3b468a3a69a568d3846, type: 2}
+  hurt: {fileID: 22100000, guid: 8da6fec0d1bc12d4bb88fa7ab9a0138b, type: 2}
+  cooked: {fileID: 22100000, guid: 565734dbdfdd07d469dbf6733511aff8, type: 2}
+  s1: 1
+  s2: 2
+  s3: 3
 --- !u!114 &164387679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1731,6 +1738,13 @@ MonoBehaviour:
   moveName: P2Move
   move: {fileID: 852946648}
   knockbackDist: 5
+  normal: {fileID: 9100000, guid: a035c134dc08f7445aaa18a6b0e64ab3, type: 2}
+  slightlyH: {fileID: 22100000, guid: 8ca561044890fdc4b9f3766712111c5b, type: 2}
+  hurt: {fileID: 22100000, guid: 1a918c05c8ddb1b42a8e3ddbac7b2148, type: 2}
+  cooked: {fileID: 22100000, guid: bf094ed20a291484083e75d780fb291c, type: 2}
+  s1: 1
+  s2: 2
+  s3: 3
 --- !u!114 &852946648
 MonoBehaviour:
   m_ObjectHideFlags: 0
