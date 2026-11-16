@@ -139,6 +139,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4601967736961310173, guid: a3407fb41b189424681e1f639a23862e, type: 3}
+      propertyPath: soundVFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 11bc0c533c46f434bbe3b0fc51cc1d47, type: 3}
     - target: {fileID: 5236558556757490889, guid: a3407fb41b189424681e1f639a23862e, type: 3}
       propertyPath: m_Sprite
       value: 

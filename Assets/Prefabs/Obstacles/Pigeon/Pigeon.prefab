@@ -233,6 +233,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6416273245183489264}
     m_Modifications:
+    - target: {fileID: -2624134409140543912, guid: e9cc55ecd88bbee46b6605951140d827, type: 3}
+      propertyPath: soundVFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 502ed2d004748a449bc683b1f4ba0f0a, type: 3}
     - target: {fileID: 1266688086249508925, guid: e9cc55ecd88bbee46b6605951140d827, type: 3}
       propertyPath: m_Height
       value: 3.9212418
