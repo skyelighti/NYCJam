@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class DayManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class DayManager : MonoBehaviour
     [SerializeField] DayInfo night;
     DayPhase currentTime;
     DayInfo currInfo;
+    [SerializeField] Slider dayCycle;
 
     [SerializeField] float volumeBlendSpeed = 0.5f;
 
@@ -56,6 +58,7 @@ public class DayManager : MonoBehaviour
         shownSky = morning.sky;
         skyMat.SetTexture("_Tex", shownSky);
         skyMat.SetFloat("_CubemapTransition", 1f);
+        dayCycle.value = 0f;
     }
 
     // Update is called once per frame
@@ -115,7 +118,10 @@ public class DayManager : MonoBehaviour
     {
         if (add < 0) { return; }
         timeCount += add;
-
+        if (dayCycle != null || dayCycle.value == 1f)
+        {
+            dayCycle.value = (float)(timeCount) / 100;
+        }
         DayPhase? nP = null;
         float best = float.MinValue;
         foreach (var dayp in daylookUp) {

@@ -19,6 +19,12 @@ public class SplineMovement : MonoBehaviour
     bool player1Col = false;
     bool player2Col = false;
     [SerializeField] Movement player2;
+
+    [SerializeField] float walkT = 0f;
+    [SerializeField] float walkSFXInterval = 1.3f;
+    [SerializeField] AudioClip walkSFX;
+
+
     Dictionary<ActionMap, float> playerSpace = new() { { ActionMap.D1Gameplay, 5f}, {ActionMap.D2Gameplay, 3f }, { ActionMap.D3Gameplay, 1.6f} };
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -60,6 +66,17 @@ public class SplineMovement : MonoBehaviour
         {
             finished = true;
         }
+
+        if (walkT < walkSFXInterval)
+        {
+            walkT += Time.deltaTime;
+        }
+        else
+        {
+            AudioManager.Instance.PlaySFX(walkSFX);
+            walkT = 0f;
+        }
+
     }
 
     void Pause() {
