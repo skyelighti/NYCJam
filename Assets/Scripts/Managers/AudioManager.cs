@@ -25,7 +25,18 @@ public class AudioManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
-        musicSource = GetComponent<AudioSource>();
+        if (musicSource == null)
+        {
+            musicSource = GetComponent<AudioSource>();
+
+        }
+    }
+
+
+    public void ChangeBGM(AudioClip BGM) {
+        musicSource.clip = BGM;
+        //add a fade?
+        musicSource.Play();
     }
 
     public void StopMusic()

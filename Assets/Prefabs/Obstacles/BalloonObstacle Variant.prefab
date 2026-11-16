@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2624134409140543912, guid: e9cc55ecd88bbee46b6605951140d827, type: 3}
+      propertyPath: soundVFX
+      value: 
+      objectReference: {fileID: 8300000, guid: a5e13bae2bd5a0f40b3c7a9726c6aaf7, type: 3}
     - target: {fileID: 2296399943758254358, guid: e9cc55ecd88bbee46b6605951140d827, type: 3}
       propertyPath: m_Name
       value: BalloonObstacle Variant

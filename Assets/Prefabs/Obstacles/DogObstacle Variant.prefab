@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2624134409140543912, guid: e9cc55ecd88bbee46b6605951140d827, type: 3}
+      propertyPath: soundVFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 0f401c3f4a9b77b4eb0403873fb0d88f, type: 3}
     - target: {fileID: 2296399943758254358, guid: e9cc55ecd88bbee46b6605951140d827, type: 3}
       propertyPath: m_Name
       value: DogObstacle Variant
