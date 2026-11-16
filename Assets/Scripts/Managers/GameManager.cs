@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public InputSystem_Actions inputActions;
     public event Action<ActionMap> ActionMapChanged;
     public ActionMap currentActionMap = ActionMap.D1Gameplay;
+    public DayPhase currentTime = DayPhase.Morning;
     private void Awake()
     {
         if (Instance != null)

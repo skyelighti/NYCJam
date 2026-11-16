@@ -3,8 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -117,7 +115,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("Dodge", true);
         dodging = true;
 
-        AudioManager.Instance.PlaySFX(dodgeSFX);
+        AudioManager.Instance.PlaySFX(dodgeSFX, 0.1f);
     }
 
     void OnDodgeEnd(Vector2 dir)
