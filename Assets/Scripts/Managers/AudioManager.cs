@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance { get; private set; }
 
     [SerializeField] AudioSource musicSource;
+    [SerializeField] AudioSource sfxSource;
 
     void Awake()
     {
@@ -37,6 +38,10 @@ public class AudioManager : MonoBehaviour
         musicSource.clip = BGM;
         //add a fade?
         musicSource.Play();
+    }
+
+    public void PlaySFX(AudioClip audio) {
+        sfxSource.PlayOneShot(audio);
     }
 
     public void StopMusic()
