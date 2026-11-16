@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,16 +20,25 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody rb;
     bool inCollisionRecovery = false;
+    float dodgeT = 0f;
+    [SerializeField] float maxDodgeLen = 2f;
+    bool dodging = true;
+    bool needToUnflip = false;
 
     [SerializeField] float knockbackDist = 3;
 
     SpriteRenderer sprite;
+
+
+
 
     StateMachine playerSM = new();
     [SerializeField] RuntimeAnimatorController normal;
     [SerializeField] RuntimeAnimatorController slightlyH;
     [SerializeField] RuntimeAnimatorController hurt;
     [SerializeField] RuntimeAnimatorController cooked;
+
+    [SerializeField] AudioClip dodgeSFX;
 
     [SerializeField] int s1, s2, s3 = 5;
     int hitAmount = 0;
@@ -105,6 +115,9 @@ public class PlayerController : MonoBehaviour
         if (unflipRoutine != null) { StopCoroutine(unflipRoutine); unflipRoutine = null; }
         SetFlip(dir.x > 0);
         animator.SetBool("Dodge", true);
+        dodging = true;
+
+        AudioManager.Instance.PlaySFX(dodgeSFX);
     }
 
     void OnDodgeEnd(Vector2 dir)
@@ -113,6 +126,8 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("Dodge", false);
         if (unflipRoutine != null) StopCoroutine(unflipRoutine);
         unflipRoutine = StartCoroutine(UnflipWhenDone());
+        dodging = false;
+
     }
     IEnumerator UnflipWhenDone()
     {
@@ -140,6 +155,21 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (dodging) {
+            dodgeT += Time.deltaTime;
+            if(dodgeT >= maxDodgeLen)
+            {
+                if (needToUnflip)
+                {
+                    OnDodgeEnd(Vector2.right);
+                }
+                else {
+                    OnDodgeEnd(Vector2.left);
+                }
+                dodgeT = 0f;
+            }
+        }
         playerSM.UpdateState();
     }
         
@@ -180,6 +210,7 @@ public class PlayerController : MonoBehaviour
     {
         sprite.GetPropertyBlock(mpb);
         mpb.SetFloat("_Flip", flip ? -1f : 1f);
+        needToUnflip = flip;
         sprite.SetPropertyBlock(mpb);
     }
 
