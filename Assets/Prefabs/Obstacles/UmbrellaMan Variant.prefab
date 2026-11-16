@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: soundVFX
       value: 
       objectReference: {fileID: 8300000, guid: e31d83907f285d34995800cc73bd9ef2, type: 3}
+    - target: {fileID: 1266688086249508925, guid: e9cc55ecd88bbee46b6605951140d827, type: 3}
+      propertyPath: m_Radius
+      value: 0.877162
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266688086249508925, guid: e9cc55ecd88bbee46b6605951140d827, type: 3}
+      propertyPath: m_Center.z
+      value: -0.120269775
+      objectReference: {fileID: 0}
     - target: {fileID: 2296399943758254358, guid: e9cc55ecd88bbee46b6605951140d827, type: 3}
       propertyPath: m_Name
       value: UmbrellaMan Variant
