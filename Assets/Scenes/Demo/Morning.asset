@@ -24,19 +24,19 @@ MonoBehaviour:
     m_Value: 0.43
   scatter:
     m_OverrideState: 1
-    m_Value: 0.711
+    m_Value: 0
   clamp:
     m_OverrideState: 1
     m_Value: 65472
   tint:
     m_OverrideState: 1
-    m_Value: {r: 0.476786, g: 0.47388855, b: 0.51482475, a: 1}
+    m_Value: {r: 0.4177897, g: 0.28235987, b: 0.23592164, a: 1}
   highQualityFiltering:
     m_OverrideState: 1
     m_Value: 0
   filter:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   downscale:
     m_OverrideState: 0
     m_Value: 0

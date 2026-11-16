@@ -25,7 +25,7 @@ public class SplineMovement : MonoBehaviour
     [SerializeField] AudioClip walkSFX;
 
 
-    Dictionary<ActionMap, float> playerSpace = new() { { ActionMap.D1Gameplay, 5f}, {ActionMap.D2Gameplay, 3f }, { ActionMap.D3Gameplay, 1.6f} };
+    Dictionary<ActionMap, float> playerSpace = new() { { ActionMap.D1Gameplay, 4f}, {ActionMap.D2Gameplay, 3f }, { ActionMap.D3Gameplay, 1.6f} };
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
