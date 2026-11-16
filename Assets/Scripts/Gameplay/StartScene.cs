@@ -2,15 +2,21 @@ using UnityEngine;
 
 public class StartScene : SceneController
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void EnterState()
     {
-        
+        Time.timeScale = 1f;
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.SwapMap(ActionMap.UI);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void ExitState()
     {
-        
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.inputActions?.Disable();
+        }
     }
 }

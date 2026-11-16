@@ -74,6 +74,7 @@ public class DayManager : MonoBehaviour
     void EnterPhase(DayPhase p)   
     {
         currentTime = p;
+        GameManager.Instance.currentTime = this.currentTime;
         currInfo = LookUp();
         skyMat.SetTexture("_Tex", shownSky);         
         skyMat.SetTexture("_Tex_Blend", currInfo.sky);

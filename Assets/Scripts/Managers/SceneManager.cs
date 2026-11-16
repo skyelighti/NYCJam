@@ -6,9 +6,9 @@ using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 
 public enum SceneNames { 
 
-    //StartScene,
+    StartScene,
     Gameplay,
-    //EndScene
+    EndScene
 }
 public class SceneManager : MonoBehaviour
 {

@@ -1,4 +1,3 @@
-using Mono.Cecil;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -40,8 +39,8 @@ public class AudioManager : MonoBehaviour
         musicSource.Play();
     }
 
-    public void PlaySFX(AudioClip audio) {
-        sfxSource.PlayOneShot(audio);
+    public void PlaySFX(AudioClip audio, float amount = 1f) {
+        sfxSource.PlayOneShot(audio, amount);
     }
 
     public void StopMusic()
