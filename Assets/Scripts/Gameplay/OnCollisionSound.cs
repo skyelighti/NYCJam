@@ -2,15 +2,13 @@ using UnityEngine;
 
 public class OnCollisionSound : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] AudioClip soundVFX;
+    AudioSource audioSource;
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource != null) {
+            audioSource.PlayOneShot(soundVFX);
+        }
     }
 }

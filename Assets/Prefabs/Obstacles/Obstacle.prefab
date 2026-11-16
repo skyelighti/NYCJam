@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6598681254901104579}
   - component: {fileID: 3218167590030125392}
   - component: {fileID: 4342688377592489816}
+  - component: {fileID: -2624134409140543912}
   m_Layer: 6
   m_Name: Obstacle
   m_TagString: Untagged
@@ -243,6 +244,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-2624134409140543912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2296399943758254358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2eb7c23bbc96a44b93308a1ec773d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OnCollisionSound
+  soundVFX: {fileID: 0}
 --- !u!1 &7511087370409924072
 GameObject:
   m_ObjectHideFlags: 0

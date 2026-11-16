@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7189501098768144403}
   - component: {fileID: 229354353714460881}
   - component: {fileID: 2280861105931953501}
+  - component: {fileID: 4275667148005571260}
   m_Layer: 0
   m_Name: Crowd
   m_TagString: Untagged
@@ -30,8 +31,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -9.28, y: 2.41, z: -14.73024}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.7500001, y: 1.7500001, z: 1.7500001}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6014391568828203915}
   m_Father: {fileID: 0}
@@ -132,6 +133,19 @@ MonoBehaviour:
   distOnTrack: 0
   horiDist: 0
   height: 0
+--- !u!114 &4275667148005571260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615645455181987088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2eb7c23bbc96a44b93308a1ec773d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OnCollisionSound
+  soundVFX: {fileID: 8300000, guid: 00c11605d2297f24eb3a5af0ba6dac8d, type: 3}
 --- !u!1 &2210056984232246104
 GameObject:
   m_ObjectHideFlags: 0
